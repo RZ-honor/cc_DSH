@@ -1,0 +1,54 @@
+# sg-agent preset composition (agent.cordis.yml).
+#
+# Mounted per-agent-session in the DSH preset plane. Per COGNITION §2 / §1.3,
+# preset rows MUST sit behind an isolate realm — `leakedServices()` rejects any
+# service a preset would leak into the ROOT realm (a second session mounting
+# the same preset would otherwise collide on provide()). So these rows are
+# wrapped in a `cordis:group` with `group: true` + `isolate: { sg: true }`,
+# giving every session its own private instances.
+#
+# The three host-root singleton rows (sg-guard / sg-memory / sg-model-route)
+# are NOT here — they live in host.cordis.yml (ROOT realm, process-global,
+# shared across sessions). This preset injects them by name; the session's
+# isolate realm is a child of the host root, so `ctx.sgGuard` / `ctx.sgModel`
+# / `ctx.sgMemory` resolve to the shared singletons.
+#
+# STATUS: the host-root rows are built + tested. The three preset rows below
+# are the remaining DSH-integration surface — they need adapters to DSH's
+# dsh-tools (ToolDefinition) / dsh-system-prompt (prompt sections) / agent
+# session model to run inside a real DSH agent. The sg-agent core they wrap
+# (QueryEngine, ALL_TOOLS, the guard gates) is built + verified in isolation
+# (tests/full-stack.test.ts composes the real stack with mock boundaries).
+# A real session mount additionally needs a DSH profile that includes
+# host.cordis.yml + this preset + RADON_API_KEY in the env.
+
+- id: sg-preset
+  name: 'cordis:group'
+  group: true
+  isolate:
+    sg: true
+  config:
+    entries:
+      # Registers the sg-agent tools (Read/Grep/Glob/Write/Edit) into the DSH
+      # tools registry, adapted from sg-agent's Tool contract to dsh-tools
+      # ToolDefinition. The query/response guard gates ride along via the
+      # tool-execution chain (sg-guard, injected from the host root).
+      - id: sg-tools
+        name: './plugins/sg-tools.ts'   # TODO: dsh-tools ToolDefinition adapter
+        config:
+          tools: read          # which sg-agent tools to expose (read-only first)
+
+      # Registers the guard-aware system-prompt section (COGNITION §12.3 stable
+      # statements: treat guard denials as "pick a safe alternative", never
+      # bypass; hardcoded rules are unbypassable; high-risk needs approval).
+      - id: sg-prompt
+        name: './plugins/sg-prompt.ts'  # TODO: dsh-system-prompt section adapter
+
+      # The Claude-Code-style main loop, mounted as the session's query engine.
+      # Builds a QueryEngine over ctx.sgModel (host root) + ctx.sgGuard (host
+      # root, via toolCtx.guard) + the registered tools, and drives it on the
+      # session's user turns. This is the sg-query preset row.
+      - id: sg-query
+        name: './plugins/sg-query.ts'   # wraps QueryEngine as a preset service
+        config:
+          maxTurns: 25

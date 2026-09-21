@@ -1,0 +1,7 @@
+# Sidecar runtime (conda env name defaults to Audio; override with SG_CONDA_ENV).
+torch
+transformers>=5.2.0
+bitsandbytes
+accelerate
+modelscope
+huggingface_hub

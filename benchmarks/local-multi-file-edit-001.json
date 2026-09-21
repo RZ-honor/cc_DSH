@@ -1,0 +1,10 @@
+{
+  "id": "local-multi-file-edit-001",
+  "category": "multi-file-edit",
+  "prompt": "Create src/foo.js exporting function foo() and src/bar.js importing and calling it, so the test passes.",
+  "setup": [
+    {"path": "test.js", "content": "import { expect, test } from 'bun:test';\nimport { bar } from './src/bar.js';\ntest('bar calls foo', () => expect(bar()).toBe('foo-called'));\n"}
+  ],
+  "success": {"files": [{"path": "src/foo.js", "contains": ["export"]}, {"path": "src/bar.js", "contains": ["import"]}], "commands": [{"command": "bun test test.js", "expectedExitCode": 0, "timeoutSeconds": 20}]},
+  "limits": {"maxTurns": 8, "timeoutSeconds": 40}
+}

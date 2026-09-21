@@ -1,0 +1,47 @@
+# Secrets — NEVER commit. Bun auto-loads .env into process.env at runtime.
+.env
+.env.*
+!.env.example
+
+# Dependencies
+node_modules/
+
+# The model weights (2GB bf16 + heads) — regenerable via guard/download_model.py
+model/
+*.safetensors
+*.pth
+
+# Python
+__pycache__/
+*.py[cod]
+*$py.class
+.pytest_cache/
+.mypy_cache/
+
+# Build
+lib/
+dist/
+*.tsbuildinfo
+
+# Local tooling / editor
+.codegraph/
+.claude/
+.idea/
+.vscode/
+*.swp
+.DS_Store
+Thumbs.db
+
+# Accidental bun bundle artifact (Windows device-name file)
+/nul
+nul
+
+# Generated / oversized eval data (regenerate with swebench/convert.ts)
+*.parquet
+swebench/data/*.jsonl
+swebench/data/_convert_swebench.py
+
+# Run dumps — keep the human ACCEPTANCE notes
+benchmarks/results/*.jsonl
+swebench/results/*.jsonl
+*.log

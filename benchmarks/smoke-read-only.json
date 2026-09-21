@@ -1,0 +1,9 @@
+{
+  "id": "smoke-read-only",
+  "category": "file-discovery",
+  "prompt": "Inspect the workspace without changing files.",
+  "setup": [{"path": "README.txt", "content": "smoke fixture\n"}],
+  "success": {"files": [{"path": "README.txt", "contains": ["smoke fixture"]}]},
+  "limits": {"maxTurns": 2, "timeoutSeconds": 10},
+  "smoke": true
+}

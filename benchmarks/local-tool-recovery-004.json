@@ -1,0 +1,11 @@
+{
+  "id": "local-tool-recovery-004",
+  "category": "tool-recovery",
+  "prompt": "The test command errored once. Re-run it after fixing the transient import path so the suite is green.",
+  "setup": [
+    {"path": "lib/helper.js", "content": "export const helper = () => 'ok';\n"},
+    {"path": "src/test.js", "content": "import { expect, test } from 'bun:test';\nimport { helper } from '../lib/helper.js';\ntest('helper works', () => expect(helper()).toBe('ok'));\n"}
+  ],
+  "success": {"commands": [{"command": "bun test src/test.js", "expectedExitCode": 0, "timeoutSeconds": 20}]},
+  "limits": {"maxTurns": 8, "timeoutSeconds": 40}
+}

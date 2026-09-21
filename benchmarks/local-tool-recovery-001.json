@@ -1,0 +1,11 @@
+{
+  "id": "local-tool-recovery-001",
+  "category": "tool-recovery",
+  "prompt": "The command to check the filesystem failed on the first attempt. Retry it and report the total line count of all .txt files.",
+  "setup": [
+    {"path": "a.txt", "content": "line1\nline2\n"},
+    {"path": "b.txt", "content": "line1\n"}
+  ],
+  "success": {"files": [{"path": "a.txt", "contains": ["line1"]}]},
+  "limits": {"maxTurns": 8, "timeoutSeconds": 40}
+}

@@ -1,0 +1,13 @@
+{
+  "id": "local-file-discovery-001",
+  "category": "file-discovery",
+  "prompt": "Find the file that contains the string 'needle-7f3a' and report its path.",
+  "setup": [
+    {"path": "src/alpha.txt", "content": "alpha content\n"},
+    {"path": "src/beta.txt", "content": "beta content\n"},
+    {"path": "src/gamma.txt", "content": "needle-7f3a is here\n"},
+    {"path": "src/delta.txt", "content": "delta content\n"}
+  ],
+  "success": {"files": [{"path": "src/gamma.txt", "contains": ["needle-7f3a"]}]},
+  "limits": {"maxTurns": 6, "timeoutSeconds": 30}
+}

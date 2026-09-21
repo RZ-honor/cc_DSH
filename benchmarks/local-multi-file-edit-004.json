@@ -1,0 +1,10 @@
+{
+  "id": "local-multi-file-edit-004",
+  "category": "multi-file-edit",
+  "prompt": "Create a config module src/config.js and a main entry src/main.js that imports the port from it, so main.js exports a function returning the port.",
+  "setup": [
+    {"path": "src/check.js", "content": "import { expect, test } from 'bun:test';\nimport { main } from './main.js';\ntest('main returns configured port', () => expect(main()).toBe(3000));\n"}
+  ],
+  "success": {"files": [{"path": "src/config.js", "contains": ["3000"]}, {"path": "src/main.js", "contains": ["config"]}], "commands": [{"command": "bun test src/check.js", "expectedExitCode": 0, "timeoutSeconds": 20}]},
+  "limits": {"maxTurns": 8, "timeoutSeconds": 40}
+}

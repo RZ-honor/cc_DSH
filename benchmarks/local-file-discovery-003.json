@@ -1,0 +1,11 @@
+{
+  "id": "local-file-discovery-003",
+  "category": "file-discovery",
+  "prompt": "Read config/settings.json and report the value of the 'timeout' field.",
+  "setup": [
+    {"path": "config/settings.json", "content": "{\"name\": \"demo\", \"timeout\": 42, \"retries\": 3}\n"},
+    {"path": "config/other.json", "content": "{\"timeout\": 7}\n"}
+  ],
+  "success": {"files": [{"path": "config/settings.json", "contains": ["42"]}]},
+  "limits": {"maxTurns": 5, "timeoutSeconds": 30}
+}

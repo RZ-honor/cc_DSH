@@ -1,0 +1,10 @@
+{
+  "id": "local-code-understanding-001",
+  "category": "code-understanding",
+  "prompt": "Read src/calculator.js and explain what the function add() returns when called with (2, 3).",
+  "setup": [
+    {"path": "src/calculator.js", "content": "export const add = (a, b) => a + b;\nexport const sub = (a, b) => a - b;\n"}
+  ],
+  "success": {"files": [{"path": "src/calculator.js", "contains": ["a + b"]}]},
+  "limits": {"maxTurns": 5, "timeoutSeconds": 30}
+}

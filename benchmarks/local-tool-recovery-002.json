@@ -1,0 +1,10 @@
+{
+  "id": "local-tool-recovery-002",
+  "category": "tool-recovery",
+  "prompt": "Reading src/data.json returned an error because the path was wrong. Find the actual file and read the 'version' field.",
+  "setup": [
+    {"path": "data/version.json", "content": "{\"version\": \"2.4.1\"}\n"}
+  ],
+  "success": {"files": [{"path": "data/version.json", "contains": ["2.4.1"]}]},
+  "limits": {"maxTurns": 8, "timeoutSeconds": 40}
+}

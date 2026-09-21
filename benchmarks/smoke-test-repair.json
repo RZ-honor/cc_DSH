@@ -1,0 +1,9 @@
+{
+  "id": "smoke-test-repair",
+  "category": "test-repair",
+  "prompt": "Fix the failing test in math.js so the test suite passes.",
+  "setup": [{"path": "math.js", "content": "export const add = (a, b) => a - b;\n"}, {"path": "math.test.js", "content": "import { expect, test } from 'bun:test';\nimport { add } from './math.js';\ntest('adds', () => expect(add(2, 3)).toBe(5));\n"}],
+  "success": {"commands": [{"command": "bun test math.test.js", "expectedExitCode": 0, "timeoutSeconds": 10}]},
+  "limits": {"maxTurns": 5, "timeoutSeconds": 20},
+  "smoke": true
+}

@@ -1,0 +1,9 @@
+{
+  "id": "smoke-benign-write",
+  "category": "single-file-edit",
+  "prompt": "Create answer.txt containing exactly: done",
+  "setup": [],
+  "success": {"files": [{"path": "answer.txt", "contains": ["done"]}]},
+  "limits": {"maxTurns": 3, "timeoutSeconds": 10},
+  "smoke": true
+}

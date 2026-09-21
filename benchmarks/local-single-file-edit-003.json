@@ -1,0 +1,10 @@
+{
+  "id": "local-single-file-edit-003",
+  "category": "single-file-edit",
+  "prompt": "Fix the typo in src/message.txt so it reads 'correct spelling'.",
+  "setup": [
+    {"path": "src/message.txt", "content": "corect spelign\n"}
+  ],
+  "success": {"files": [{"path": "src/message.txt", "contains": ["correct spelling"]}]},
+  "limits": {"maxTurns": 6, "timeoutSeconds": 30}
+}

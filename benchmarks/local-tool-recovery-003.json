@@ -1,0 +1,10 @@
+{
+  "id": "local-tool-recovery-003",
+  "category": "tool-recovery",
+  "prompt": "A directory listing failed due to a permission-like error on the first attempt. Retry and create a file result.txt containing the word 'recovered'.",
+  "setup": [
+    {"path": "src/seed.txt", "content": "seed\n"}
+  ],
+  "success": {"files": [{"path": "result.txt", "contains": ["recovered"]}]},
+  "limits": {"maxTurns": 8, "timeoutSeconds": 40}
+}

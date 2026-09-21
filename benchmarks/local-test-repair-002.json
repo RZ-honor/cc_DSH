@@ -1,0 +1,11 @@
+{
+  "id": "local-test-repair-002",
+  "category": "test-repair",
+  "prompt": "Fix src/parse.js so all tests pass, including the edge-case for empty input.",
+  "setup": [
+    {"path": "src/parse.js", "content": "export const parseNumber = (s) => (s === '' ? 0 : Number(s));\n"},
+    {"path": "src/parse.test.js", "content": "import { expect, test } from 'bun:test';\nimport { parseNumber } from './parse.js';\ntest('parses digits', () => expect(parseNumber('42')).toBe(42));\ntest('handles empty', () => expect(parseNumber('')).toBe(0));\n"}
+  ],
+  "success": {"commands": [{"command": "bun test src/parse.test.js", "expectedExitCode": 0, "timeoutSeconds": 20}]},
+  "limits": {"maxTurns": 6, "timeoutSeconds": 40}
+}

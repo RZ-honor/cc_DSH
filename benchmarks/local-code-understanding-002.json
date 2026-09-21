@@ -1,0 +1,10 @@
+{
+  "id": "local-code-understanding-002",
+  "category": "code-understanding",
+  "prompt": "In src/app.js find the function named 'formatName' and report what it does with a missing last name.",
+  "setup": [
+    {"path": "src/app.js", "content": "export function formatName(first, last) {\n  if (!last) return first;\n  return first + ' ' + last;\n}\n"}
+  ],
+  "success": {"files": [{"path": "src/app.js", "contains": ["if (!last)"]}]},
+  "limits": {"maxTurns": 5, "timeoutSeconds": 30}
+}

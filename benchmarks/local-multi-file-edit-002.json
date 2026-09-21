@@ -1,0 +1,11 @@
+{
+  "id": "local-multi-file-edit-002",
+  "category": "multi-file-edit",
+  "prompt": "Add a shared helper to src/util.js and use it from both src/a.js and src/b.js to double a number.",
+  "setup": [
+    {"path": "src/a.js", "content": "export const doubleA = (n) => n;\n"},
+    {"path": "src/b.js", "content": "export const doubleB = (n) => n;\n"}
+  ],
+  "success": {"files": [{"path": "src/util.js", "contains": ["export"]}, {"path": "src/a.js", "contains": ["util"]}, {"path": "src/b.js", "contains": ["util"]}]},
+  "limits": {"maxTurns": 8, "timeoutSeconds": 40}
+}

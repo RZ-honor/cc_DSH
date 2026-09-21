@@ -1,0 +1,10 @@
+{
+  "id": "local-code-understanding-003",
+  "category": "code-understanding",
+  "prompt": "Read src/config.ts and report the default port the server listens on.",
+  "setup": [
+    {"path": "src/config.ts", "content": "export const config = {\n  host: '0.0.0.0',\n  port: 8080,\n  workers: 4,\n};\n"}
+  ],
+  "success": {"files": [{"path": "src/config.ts", "contains": ["8080"]}]},
+  "limits": {"maxTurns": 5, "timeoutSeconds": 30}
+}

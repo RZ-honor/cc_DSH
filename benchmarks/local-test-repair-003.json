@@ -1,0 +1,11 @@
+{
+  "id": "local-test-repair-003",
+  "category": "test-repair",
+  "prompt": "Make the flaky sort test in src/sort.js deterministic by fixing the implementation, then run the suite.",
+  "setup": [
+    {"path": "src/sort.js", "content": "export const sortAsc = (arr) => arr.sort();\n"},
+    {"path": "src/sort.test.js", "content": "import { expect, test } from 'bun:test';\nimport { sortAsc } from './sort.js';\ntest('sorts numbers', () => expect(sortAsc([3, 1, 2])).toEqual([1, 2, 3]));\n"}
+  ],
+  "success": {"commands": [{"command": "bun test src/sort.test.js", "expectedExitCode": 0, "timeoutSeconds": 20}]},
+  "limits": {"maxTurns": 6, "timeoutSeconds": 40}
+}

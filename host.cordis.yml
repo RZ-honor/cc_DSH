@@ -1,0 +1,42 @@
+# sg-agent host-root composition.
+#
+# Mounted into the DSH ROOT realm — process-global, shared across every agent
+# session. Contains cross-session singleton services (the sidecar, the project
+# memory store, the model route). A DSH profile pulls this file in via
+# @deepseek-ai/cordis-plugin-include (config.path), so the relative plugin
+# paths below resolve from this file's directory (the code_cordis root).
+#
+# Per COGNITION §2: sg-guard / sg-memory / sg-model-route live here (ROOT realm,
+# never per-session isolated — the DSH preset leak audit would reject them
+# from a preset). sg-tools / sg-prompt / sg-query belong in agent.cordis.yml.
+
+- id: sg-guard
+  name: './plugins/sg-guard.ts'
+  config:
+    mode: ${SG_GUARD_MODE:-model}
+    # Empty modelPath → GuardClient uses SG_MODEL_PATH or <repo>/model.
+    # condaEnv defaults to SG_CONDA_ENV or Audio (transformers>=5.2 + bitsandbytes).
+    modelPath: ${SG_MODEL_PATH:-}
+    condaEnv: ${SG_CONDA_ENV:-Audio}
+    classifyTimeoutMs: 30000
+    startupTimeoutMs: 240000
+    maxRestarts: 3
+
+# --- forthcoming host-root rows (next phases) ---------------------------
+
+- id: sg-memory
+  name: './plugins/sg-memory.ts'
+  config:
+    defaultLimit: 8
+
+- id: sg-model-route
+  name: './plugins/sg-model-route.ts'
+  config:
+    # Primary: radon (DeepSeek-V4-Flash, openai-completions, ctx 1M). Fallback:
+    # das (gpt-5.6-terra, openai-responses) — used only on pre-first-chunk
+    # failure of radon. Both providers + credentials resolved by DSH llm-pi-ai
+    # from ~/.dsh/settings.yaml (apiKeyEnv); sg-model-route just routes.
+    primary: radon
+    primaryModel: DeepSeek-V4-Flash
+    fallback: das
+    fallbackModel: gpt-5.6-terra

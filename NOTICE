@@ -1,0 +1,14 @@
+sg-agent (this repository)
+  MIT License, Copyright (c) 2026 RZ-honor
+  See LICENSE.
+
+SingGuard-NSFA-0.8B (weights, not shipped in this git tree)
+  Apache License 2.0
+  https://huggingface.co/inclusionAI/SingGuard-NSFA-0.8B
+  Obtain via `python guard/download_model.py`.
+
+@deepseek-ai/cordis, schemastery, dsh-llm, dsh-llm-pi-ai, dsh-tools,
+dsh-agent, dsh-system-prompt
+  MIT License, Copyright (c) 2026 DeepSeek
+  Declared as workspace:^ peers. A local deepseek-harness checkout is
+  required; this repository does not vendor those packages.

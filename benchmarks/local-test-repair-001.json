@@ -1,0 +1,11 @@
+{
+  "id": "local-test-repair-001",
+  "category": "test-repair",
+  "prompt": "Fix src/reverse.js so the test suite passes.",
+  "setup": [
+    {"path": "src/reverse.js", "content": "export const reverse = (s) => s;\n"},
+    {"path": "src/reverse.test.js", "content": "import { expect, test } from 'bun:test';\nimport { reverse } from './reverse.js';\ntest('reverses', () => expect(reverse('abc')).toBe('cba'));\n"}
+  ],
+  "success": {"commands": [{"command": "bun test src/reverse.test.js", "expectedExitCode": 0, "timeoutSeconds": 20}]},
+  "limits": {"maxTurns": 6, "timeoutSeconds": 40}
+}

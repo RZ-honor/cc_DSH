@@ -1,0 +1,11 @@
+{
+  "id": "local-code-understanding-004",
+  "category": "code-understanding",
+  "prompt": "Find every TODO comment in the codebase and report the file and line of the first one.",
+  "setup": [
+    {"path": "src/main.js", "content": "export function main() {\n  // TODO: handle edge case\n  return 0;\n}\n"},
+    {"path": "src/helper.js", "content": "export const helper = () => 'ok';\n"}
+  ],
+  "success": {"files": [{"path": "src/main.js", "contains": ["TODO"]}]},
+  "limits": {"maxTurns": 6, "timeoutSeconds": 30}
+}

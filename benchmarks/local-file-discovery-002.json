@@ -1,0 +1,14 @@
+{
+  "id": "local-file-discovery-002",
+  "category": "file-discovery",
+  "prompt": "List every .md file in the docs directory and report how many there are.",
+  "setup": [
+    {"path": "docs/a.md", "content": "a\n"},
+    {"path": "docs/b.md", "content": "b\n"},
+    {"path": "docs/c.md", "content": "c\n"},
+    {"path": "docs/readme.txt", "content": "not markdown\n"},
+    {"path": "docs/sub/d.md", "content": "d\n"}
+  ],
+  "success": {"files": [{"path": "docs/a.md", "contains": ["a"]}, {"path": "docs/sub/d.md", "contains": ["d"]}]},
+  "limits": {"maxTurns": 6, "timeoutSeconds": 30}
+}

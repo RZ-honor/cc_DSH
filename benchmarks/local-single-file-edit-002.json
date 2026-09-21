@@ -1,0 +1,10 @@
+{
+  "id": "local-single-file-edit-002",
+  "category": "single-file-edit",
+  "prompt": "Add a max() function to src/utils.js that returns the larger of two numbers.",
+  "setup": [
+    {"path": "src/utils.js", "content": "export const min = (a, b) => (a < b ? a : b);\n"}
+  ],
+  "success": {"files": [{"path": "src/utils.js", "contains": ["export const max"]}]},
+  "limits": {"maxTurns": 6, "timeoutSeconds": 30}
+}

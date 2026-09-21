@@ -1,0 +1,10 @@
+{
+  "id": "local-single-file-edit-001",
+  "category": "single-file-edit",
+  "prompt": "Edit src/greet.js so greet('world') returns 'hello world'.",
+  "setup": [
+    {"path": "src/greet.js", "content": "export const greet = (name) => 'hi ' + name;\n"}
+  ],
+  "success": {"files": [{"path": "src/greet.js", "contains": ["'hello ' + name"]}], "commands": [{"command": "bun -e \"import('./src/greet.js').then(m => { if (m.greet('world') !== 'hello world') process.exit(1) })\"", "expectedExitCode": 0, "timeoutSeconds": 15}]},
+  "limits": {"maxTurns": 6, "timeoutSeconds": 30}
+}

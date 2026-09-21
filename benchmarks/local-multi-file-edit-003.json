@@ -1,0 +1,11 @@
+{
+  "id": "local-multi-file-edit-003",
+  "category": "multi-file-edit",
+  "prompt": "Rename the function in src/old.js to 'renamed' and update the import in src/consumer.js accordingly.",
+  "setup": [
+    {"path": "src/old.js", "content": "export const original = () => 'result';\n"},
+    {"path": "src/consumer.js", "content": "import { original } from './old.js';\nexport const run = () => original();\n"}
+  ],
+  "success": {"files": [{"path": "src/old.js", "contains": ["renamed"]}, {"path": "src/consumer.js", "contains": ["renamed"]}]},
+  "limits": {"maxTurns": 8, "timeoutSeconds": 40}
+}

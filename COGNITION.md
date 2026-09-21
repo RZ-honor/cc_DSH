@@ -9,7 +9,7 @@
 工作目录 `D:\ProJect_Ds\code_cordis\`（即本文件所在目录）是待建目标项目根。
 
 源依据已逐一确认：
-- **Claude Code 源码**确实存在于 `D:\honor\Documents\src\src`（已逐文件读取，非仅第三方摘要）。`query/transitions.ts` 在该 dump 中缺失，`Terminal`/`Continue` 类型从 `State` 记录与每个 `return`/`continue` 站点重建。
+- **Claude Code 架构参考**取自本地源码快照 `<local-dump>/src`（已逐文件读取，用于架构参考；未随本仓库分发）。`query/transitions.ts` 在该 dump 中缺失，`Terminal`/`Continue` 类型从 `State` 记录与每个 `return`/`continue` 站点重建。
 - **SingGuard 研究**：`singguard_research/` 下技术报告 + model card + config + 风险分类 JSON 全部确认。
 - **DSH 宿主**：`D:\deepseek\.dsh\` 与源码 `D:\ProJect_Ds\deepseek-harness` 中的 `cordis.yml`/`agent.cordis.yml` 已读，双平面与 isolate 语义已从注释确认。
 

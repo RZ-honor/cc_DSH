@@ -28,7 +28,7 @@ bun bin/sg-agent.ts --boot-check
 ```
 [t3] blocks=text,tool-call:Read  arguments={"file_path":"calc.py"}
 [t4] blocks=text,tool-call:Edit  arguments={"file_path":"calc.py","old_string":"return a + b","new_string":"return a / b"}
-  result(...) isErr=false: edited C:\Users\honor\...
+  result(...) isErr=false: edited calc.py
 [e2e-real] turns=5 toolCalls=4
 [e2e-real] outcome: resolved=true eval=tests tests=1/1
 [e2e-real] model diff (157B):

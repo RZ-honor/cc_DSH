@@ -4,18 +4,6 @@
 
 本仓库即 `code_cordis` / `DSH_cc` 目录树。许可证：MIT（见 [LICENSE](LICENSE)）。
 
-## 为什么这套设计可以开源
-
-这里的*设计*是一组插件组合，而不是对专有宿主的 fork：
-
-| 层次 | 它是什么 | 它不是什么 |
-|---|---|---|
-| DSH 宿主 | Cordis 插件行、isolate realm、LLM provider | DeepSeek Harness 的重新实现 |
-| Agent 运行时 | QueryEngine / queryLoop / Tool 契约（Claude Code 架构） | Claude Code 本身，或其宿主/进程模型 |
-| 安全层 | 硬编码规则 + 审批闸门 + 宿主沙箱 | 一句“请注意安全”的提示词 |
-
-关于「克隆即可运行」，有一点如实说明：DSH 包以 `"workspace:^"` 声明，需要从本地 [deepseek-harness](https://github.com/deepseek-ai) 检出解析。本仓库**不**内嵌 DSH 或 API 密钥。
-
 ## 安全：为什么护栏是代码，而不是提示词
 
 一个能执行 `Write`/`Edit` 的编码 agent 就是特权进程。只存在于系统提示词里的护栏是可以被绕过的（越狱、工具结果注入、“忽略以上指令”）。因此安全判定被放在工具执行路径上的**代码层**，而不是提示词里：
